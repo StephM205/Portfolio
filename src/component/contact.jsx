@@ -3,6 +3,7 @@ import "../assets/css/contact.css";
 import { PlanetCanvas } from "./planetCanvas";
 
 export const Contact = () => {
+  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,16 +26,40 @@ export const Contact = () => {
     setLoading(true);
 
     try {
-      // Simulate email sending (replace with actual backend endpoint)
-      console.log("Form data:", formData);
+      if (!formspreeEndpoint) {
+        throw new Error("Missing VITE_FORMSPREE_ENDPOINT");
+      }
+
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Portfolio contact from ${formData.name}`,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree request failed");
+      }
+
       setFeedback("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
 
       setTimeout(() => {
         setFeedback("");
       }, 3000);
-    } catch {
-      setFeedback("Failed to send message. Please try again.");
+    } catch (error) {
+      const message =
+        typeof error?.message === "string"
+          ? error.message
+          : "Please try again.";
+      setFeedback(`Failed to send message: ${message}`);
     } finally {
       setLoading(false);
     }
