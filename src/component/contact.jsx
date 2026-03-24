@@ -3,7 +3,7 @@ import "../assets/css/contact.css";
 import { PlanetCanvas } from "./planetCanvas";
 
 export const Contact = () => {
-  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+  const formspreeEndpoint = "https://formspree.io/f/xreyndrl";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
