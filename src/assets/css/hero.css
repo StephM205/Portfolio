@@ -1,0 +1,290 @@
+.hero-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .hero-container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 80px;
+  }
+}
+
+/* LEFT */
+.hero-left {
+  max-width: 600px;
+  text-align: center;
+  color: white;
+  animation: slideLeft 1s ease-out;
+}
+
+@media (min-width: 1024px) {
+  .hero-left {
+    text-align: left;
+  }
+
+  @keyframes slideLeft {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+.hero-sub {
+  color: #9ca3af;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-role {
+  margin-top: 14px;
+  font-size: 42px;
+  color: #d1d5db;
+}
+
+.hero-desc {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+/* RIGHT */
+.hero-card-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  animation: slideRight 1s ease-out;
+}
+
+@media (min-width: 1024px) {
+  .hero-card-wrapper {
+    justify-content: flex-end;
+  }
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* glow */
+.hero-card-glow {
+  position: absolute;
+  inset: 0;
+  background: rgba(139, 92, 246, 0.25);
+  filter: blur(40px);
+  border-radius: 24px;
+}
+
+/* card */
+/* wrapper */
+.hero-card-wrapper {
+  perspective: 1000px;
+  position: relative;
+}
+
+/* glow động */
+.hero-card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(45deg, #7b2cff, #3b82f6);
+  filter: blur(50px);
+  opacity: 0.4;
+  animation: glowMove 6s infinite alternate;
+}
+
+@keyframes glowMove {
+  0% {
+    transform: translateX(-20px) translateY(-20px);
+  }
+  100% {
+    transform: translateX(20px) translateY(20px);
+  }
+}
+
+/* card */
+.hero-card {
+  position: relative;
+  width: 350px;
+  height: 480px;
+  border-radius: 24px;
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  transition: transform 0.2s ease;
+}
+
+/* hover nâng lên */
+.hero-card:hover {
+  transform: scale(1.05);
+}
+
+/* inner */
+.hero-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* image */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* info */
+/* overlay gradient phía dưới (QUAN TRỌNG) */
+.hero-card-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.4),
+    transparent
+  );
+}
+
+/* username */
+.hero-username {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* status */
+.hero-status {
+  color: #22c55e;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+/* button */
+.hero-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 7px;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.3s ease;
+}
+
+/* hover giống UI xịn */
+.hero-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* viền chạy */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px; /* độ dày viền */
+  border-radius: 24px;
+
+  background: linear-gradient(120deg, #7b2cff, #3b82f6, #7b2cff);
+
+  background-size: 300% 300%;
+  animation: borderRun 4s linear infinite;
+
+  z-index: 0;
+}
+
+/* lớp mask để giữ phần trong */
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 22px;
+  background: rgba(10, 10, 15, 0.9); /* màu nền card */
+  z-index: 1;
+}
+
+/* nội dung phải nằm trên */
+.hero-card-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* animation */
+@keyframes borderRun {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* con trỏ nhấp nháy */
+.cursor {
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
