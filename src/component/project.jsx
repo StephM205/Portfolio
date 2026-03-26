@@ -12,7 +12,7 @@ const projectData = [
       "Goal management app with reusable components, state management, and realtime goal tracking.",
     tech: ["React.js", "Bootstrap", "Axios", "REST API"],
     image: project1,
-    link: "#",
+    link: "https://noteurgoals.live/",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projectData = [
       "Online quiz app with topic selection, question workflow, and result computation using JSON Server.",
     tech: ["HTML", "CSS", "JavaScript", "JSON Server"],
     image: project2,
-    link: "#",
+    link: "https://quiz-psi-gilt.vercel.app/",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projectData = [
       "Responsive personal portfolio that showcases projects, skills, and engagement with smooth transitions.",
     tech: ["React", "Tailwind", "Vite", "CSS Animations"],
     image: project3,
-    link: "#",
+    link: "https://portfolio-five-ecru-28.vercel.app/",
   },
 ];
 
@@ -177,7 +177,7 @@ export const ArcSlider = () => {
                     <p>{item.description}</p>
                     <p className="tech">Tech: {item.tech?.join(" • ")}</p>
                     <a href={item.link} className="project-link">
-                      View details
+                      View more
                     </a>
                   </div>
                 </div>
