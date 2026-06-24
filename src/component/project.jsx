@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import "../assets/css/project.css";
 import project1 from "../assets/images/project1.png";
 import project2 from "../assets/images/project2.png";
@@ -97,11 +98,17 @@ export const ArcSlider = () => {
   };
 
   return (
-    <div className="reveal-on-scroll">
-      <div className="project-head">
+    <div id="projects" className="reveal-on-scroll">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="project-head"
+      >
         <h2 className="project-sub">FEATURED WORKS</h2>
         <h1 className="project-title">My Projects</h1>
-      </div>
+      </motion.div>
       <section
         className="arc-slider"
         aria-label="Project arc carousel"
@@ -119,7 +126,7 @@ export const ArcSlider = () => {
           <span>&lt;</span>
         </button>
 
-        <div className="arc-container">
+        <div className="arc-container" style={{ perspective: "1000px" }}>
           {projectData.map((item, index) => {
             // Normalize indices around the active item
             let rawOffset = index - active;
@@ -142,13 +149,31 @@ export const ArcSlider = () => {
             const rotateY = circlePosition * (180 / Math.PI) * 0.4;
 
             return (
-              <article
+              <motion.article
                 key={item.id}
                 className={`arc-card${index === active ? " active" : ""}`}
-                style={{
-                  transform: `translateX(${x}px) translateY(${y}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`,
-                  zIndex: 100 - Math.round(absOffset),
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  x,
+                  y,
+                  z,
+                  rotateY,
+                  scale,
                   opacity,
+                  zIndex: 100 - Math.round(absOffset),
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  mass: 0.8,
+                }}
+                whileHover={{
+                  scale: index === active ? scale * 1.03 : scale,
+                  boxShadow:
+                    index === active
+                      ? "0 20px 40px rgba(14,77,164,0.3)"
+                      : "none",
                 }}
                 onClick={() => {
                   setActive(index);
@@ -164,11 +189,7 @@ export const ArcSlider = () => {
                 }}
               >
                 <div className="card-inner">
-                  <div
-                    className="img"
-                    // style={{ backgroundImage: `url(${item.image})` }}
-                    aria-hidden="true"
-                  >
+                  <div className="img" aria-hidden="true">
                     <img src={item.image} alt={`${item.title} screenshot`} />
                   </div>
 
@@ -176,12 +197,17 @@ export const ArcSlider = () => {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <p className="tech">Tech: {item.tech?.join(" • ")}</p>
-                    <a href={item.link} className="project-link">
+                    <a
+                      href={item.link}
+                      className="project-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       View more
                     </a>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>

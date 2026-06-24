@@ -1,67 +1,53 @@
-import { useEffect } from "react";
+import { useState, lazy, Suspense } from "react";
+import { AnimatePresence } from "framer-motion";
 import "./App.css";
+
+// Global Effects
+import { CustomCursor } from "./component/effects/CustomCursor";
+import { ScrollProgress } from "./component/effects/ScrollProgress";
+import { GradientMesh } from "./component/effects/GradientMesh";
+import { MouseSpotlight } from "./component/effects/MouseSpotlight";
+import { LoadingScreen } from "./component/effects/LoadingScreen";
+
+// Components
 import { Navbar } from "./component/navbar";
 import { Hero } from "./component/hero";
 import { About } from "./component/about";
 import { Experience } from "./component/experience";
 import { Skills } from "./component/skills";
-import { ArcSlider } from "./component/project";
+import { ArcSlider as Projects } from "./component/project"; // I'll refactor ArcSlider later
 import { Contact } from "./component/contact";
+
 function App() {
-  useEffect(() => {
-    const revealElements = document.querySelectorAll(".reveal-on-scroll");
-    if (!revealElements.length) return undefined;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("revealed");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -40px 0px",
-      }
-    );
-
-    revealElements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
-      <div className="relative min-h-screen bg-[#0a0a0f]">
-        {/* Wave SVG */}
-        <svg
-          className="fixed absolute top-0 left-0 w-full h-full"
-          viewBox="0 0 1440 800"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="url(#gradient)"
-            d="M0,400 C300,600 900,200 1440,400 L1440,0 L0,0 Z"
-            className="blur-[100px] opacity-70"
-          />
-          <defs>
-            <linearGradient id="gradient">
-              <stop offset="0%" stopColor="#7b2cff" />
-              <stop offset="100%" stopColor="#3b82f6" />
-            </linearGradient>
-          </defs>
-        </svg>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen key="loading" onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
 
-        <div className="relative z-10 text-white p-10">
+      <CustomCursor />
+      <ScrollProgress />
+      <MouseSpotlight />
+      <GradientMesh />
+
+      {!isLoading && (
+        <div className="relative z-10 w-full min-h-screen text-text selection:bg-primary/30 selection:text-white">
           <Navbar />
-          <Hero />
-          <About />
-          <Experience />
-          <Skills />
-          <ArcSlider />
-          <Contact />
+          
+          <main className="flex flex-col gap-24 md:gap-32 pb-24">
+            <Hero />
+            <About />
+            <Experience />
+            <Skills />
+            <Projects />
+            <Contact />
+          </main>
         </div>
-      </div>
+      )}
     </>
   );
 }

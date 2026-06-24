@@ -1,29 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+@theme {
+  --color-primary: #0E4DA4;
+  --color-secondary: #D4ECFF;
+  --color-dark: #0A0A0F;
+  --color-text: #FFFFFF;
+  --font-poppins: "Poppins", sans-serif;
 }
 
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
-  transition: opacity 0.75s ease, transform 0.75s ease, filter 0.75s ease;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-poppins);
+  }
+  
+  body {
+    background-color: var(--color-dark);
+    color: var(--color-text);
+    overflow-x: hidden;
+  }
 }
 
-.reveal-on-scroll.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0c438c;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll,
-  .reveal-on-scroll.revealed {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    transition: none;
+/* Hide default cursor to use custom cursor */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, input, textarea {
+    cursor: none;
   }
 }
 
