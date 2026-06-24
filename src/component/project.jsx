@@ -99,16 +99,25 @@ export const ArcSlider = () => {
 
   return (
     <div id="projects" className="reveal-on-scroll">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="project-head"
-      >
-        <h2 className="project-sub">FEATURED WORKS</h2>
-        <h1 className="project-title">My Projects</h1>
-      </motion.div>
+      <div className="text-center mb-20">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-primary font-semibold tracking-wider uppercase text-sm mb-2"
+        >
+          FEATURED WORKS
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-4xl md:text-5xl font-bold"
+        >
+          My Projects.
+        </motion.h2>
+      </div>
       <section
         className="arc-slider"
         aria-label="Project arc carousel"
