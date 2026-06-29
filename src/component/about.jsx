@@ -1,6 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, GraduationCap, Mail, Phone, Code2, Briefcase, Award } from "lucide-react";
+import {
+  MapPin,
+  GraduationCap,
+  Mail,
+  Phone,
+  Code2,
+  Briefcase,
+  Award,
+} from "lucide-react";
 import { cn } from "../utils/cn";
 
 export const About = () => {
@@ -8,20 +16,24 @@ export const About = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+      transition: { staggerChildren: 0.1 },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
   };
 
   return (
     <section id="about" className="py-20 relative z-10">
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="mb-12">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -29,7 +41,7 @@ export const About = () => {
           >
             Introduction
           </motion.p>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -41,7 +53,7 @@ export const About = () => {
         </div>
 
         {/* Bento Grid */}
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -49,7 +61,7 @@ export const About = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {/* Main About Card (Spans 2 cols) */}
-          <motion.div 
+          <motion.div
             variants={item}
             className="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500"
           >
@@ -60,7 +72,8 @@ export const About = () => {
               appealing and highly functional. As a Frontend Developer and UI/UX
               Designer, I focus on creating responsive interfaces, clean user
               flows, and smooth interactions that deliver real value to users.
-              Constantly learning and adapting to new technologies to build better products.
+              Constantly learning and adapting to new technologies to build
+              better products.
             </p>
           </motion.div>
 
@@ -87,24 +100,32 @@ export const About = () => {
           </motion.div>
 
           {/* Stats Cards */}
-          <motion.div variants={item} className="group relative rounded-3xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(14,77,164,0.3)] transition-all duration-500">
+          <motion.div
+            variants={item}
+            className="group relative rounded-3xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(14,77,164,0.3)] transition-all duration-500"
+          >
             <Briefcase className="text-primary mb-4" size={32} />
-            <h4 className="text-4xl font-bold text-white mb-2">3+</h4>
+            <h4 className="text-4xl font-bold text-white mb-2">1+</h4>
             <p className="text-white/70 font-medium">Years Experience</p>
           </motion.div>
 
-          <motion.div variants={item} className="group relative rounded-3xl bg-gradient-to-br from-secondary/20 to-secondary/5 border border-secondary/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(212,236,255,0.2)] transition-all duration-500">
+          <motion.div
+            variants={item}
+            className="group relative rounded-3xl bg-gradient-to-br from-secondary/20 to-secondary/5 border border-secondary/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(212,236,255,0.2)] transition-all duration-500"
+          >
             <Code2 className="text-secondary mb-4" size={32} />
             <h4 className="text-4xl font-bold text-white mb-2">10+</h4>
             <p className="text-white/70 font-medium">Projects Built</p>
           </motion.div>
 
-          <motion.div variants={item} className="group relative rounded-3xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-500">
+          <motion.div
+            variants={item}
+            className="group relative rounded-3xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/20 p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-500"
+          >
             <Award className="text-purple-400 mb-4" size={32} />
             <h4 className="text-4xl font-bold text-white mb-2">5+</h4>
             <p className="text-white/70 font-medium">Certificates</p>
           </motion.div>
-
         </motion.div>
       </div>
     </section>
